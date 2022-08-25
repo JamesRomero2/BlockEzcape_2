@@ -22,3 +22,15 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="MobileController" parent="." instance=ExtResource( 2 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.7, 0.7 )
+smoothing_enabled = true
+smoothing_speed = 3.0
+drag_margin_left = 0.4
+drag_margin_top = 0.4
+drag_margin_right = 0.4
+drag_margin_bottom = 0.4
+editor_draw_limits = true
+editor_draw_drag_margin = true
