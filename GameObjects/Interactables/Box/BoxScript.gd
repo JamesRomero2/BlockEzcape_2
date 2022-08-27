@@ -7,12 +7,13 @@ var blocksVelocity : Vector2 = Vector2.ZERO setget _setBlocksVelocity, _getBlock
 var velocity : Vector2 = Vector2.ZERO
 
 func _process(delta):
-	if pickedUp:
+	if _getPickedUp():
 		move_and_collide(_getBlocksVelocity())
+	else:
+		move_and_collide(Vector2.ZERO)
 
 func _setPickedUp(value):
 	pickedUp = value
-	print(pickedUp)
 	
 func _getPickedUp():
 	return pickedUp
@@ -25,7 +26,5 @@ func _getBlocksVelocity():
 
 func _on_InteractableArea_body_entered(body):
 	if body.name == "Player":
-		print("First Checks Approve")
+#		print("First Checks Approve")
 		body._setPlayerIsInHandle(true)
-#		emit_signal("PlayerEnteredInteractableArea")
-#		body.mobileControls._setButtonState(true)
