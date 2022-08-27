@@ -25,11 +25,6 @@ func _onGNDButtonPressed():
 	
 	_setGrabbingState(!_getGrabbingState())
 	
-	if _getGrabbingState():
-		grabNDropButton.normal = letGoTexture
-	else:
-		grabNDropButton.normal = grabTexture
-	
 
 # INPUT VECTOR - For Player Movement
 func _getInputVector():
@@ -38,46 +33,22 @@ func _getInputVector():
 # SETGET FUNCTIONS
 func _setButtonActiveState(value):
 	buttonActiveState = value
+	
+	if !_getButtonActiveState():
+		grabNDropButton.normal = grabTexture
 
 func _getButtonActiveState():
 	return buttonActiveState
 
 func _setGrabbingState(value):
 	grabbingState = value
+	
+	if _getGrabbingState():
+		grabNDropButton.normal = letGoTexture
+	else:
+		grabNDropButton.normal = grabTexture
 
 func _getGrabbingState():
 	return grabbingState
-
-
-## PRE-DEFINE FUNCTIONS
-#func _ready():
-#	grabNDropButton.connect("pressed", self, "_on_TouchScreenButton_pressed")
-#
-## USER DEFINED FUNCTIONS
-#func displayButton():
-##	if !_getButtonState(): return
-#
-#	var tween := create_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
-#	grabNDropButtonComponent.scale = Vector2(.9, .9)
-#	tween.tween_property(grabNDropButtonComponent, "scale", Vector2.ONE, 0.7)
-#
-##	if grabbingState:
-##		grabNDropButton.normal = letGoTexture
-##	else:
-##		grabNDropButton.normal = grabTexture
-#
-## SIGNALS FUNCTIONS
-#func _on_TouchScreenButton_pressed():
-##	if _getButtonState():
-#		_setGrabbingState(true)
-#
-## SETTER AND GETTER METHODS
-## GRABBING STATE
-#func _setGrabbingState(value):
-#	grabbingState = value
-#	displayButton(_getButtonState())
-#
-#func _getGrabbingState():
-#	return grabbingState
 
 

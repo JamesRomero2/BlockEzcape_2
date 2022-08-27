@@ -3,9 +3,9 @@ extends KinematicBody2D
 onready var mobileControls = $MobileController as CanvasLayer
 onready var playerLooking = $RayCast2D
 
-const MAXSPEED = 80.00
-const ACCELERATION = 500.00
-const FRICTION = 500.00
+const MAXSPEED = .50
+const ACCELERATION = 1.00
+const FRICTION = 3.00
 const PICKUPRADIUS = 16
 const LOOKLENGTH = 15
 
@@ -26,21 +26,28 @@ func _process(delta):
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta) 
 	
-	velocity = move_and_slide(velocity)
+	move_and_collide(velocity)
 
 func _rotateRaycast(vector: Vector2):
 	if vector == Vector2.ZERO or mobileControls._getGrabbingState():
 		playerLooking.set_cast_to(playerLooking.get_cast_to())
 	else:
 		playerLooking.set_cast_to(vector * LOOKLENGTH)
-	
+		
+	var objectCollided = playerLooking.get_collider()
 	if playerLooking.is_colliding():
 		if playerLooking.get_collider().is_in_group("Blocks") and _getPlayerIsInHandle():
-#			playerLooking.get_collider()._setBlocksVelocity(vector)
 			mobileControls._setButtonActiveState(true)
+			if mobileControls._getGrabbingState():
+				objectCollided._setPickedUp(true)
+				objectCollided._setBlocksVelocity(velocity)
 			print("Second Checks Approve")
-	else:
-		mobileControls._setButtonActiveState(false)
+		else:
+			mobileControls._setButtonActiveState(false)
+			mobileControls._setGrabbingState(false)
+			objectCollided._setPickedUp(false)
+			objectCollided._setBlocksVelocity(Vector2.ZERO)
+			print("Button Unactive")
 
 # SETGET METHODS
 func _setPlayerIsInHandle(value):
