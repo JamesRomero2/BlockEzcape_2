@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Images/GrabButton.png" type="Texture" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 32.0
+
+[node name="GrabNDropButtonComponent" type="Node2D"]
+
+[node name="GNDButton" type="TouchScreenButton" parent="."]
+position = Vector2( -32, -32 )
+normal = ExtResource( 1 )
+shape = SubResource( 1 )

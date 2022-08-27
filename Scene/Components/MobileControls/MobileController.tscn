@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scene/Components/JoyStickController/JoyStick.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scene/Components/MobileControls/MobileControls.gd" type="Script" id=2]
+[ext_resource path="res://Scene/Components/GrabNDropButtonController/GrabNDropButton.tscn" type="PackedScene" id=3]
+
+[node name="MobileController" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="Container" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -180.0
+margin_right = 320.0
+margin_bottom = 180.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="JoyStickContainer" type="Control" parent="Container"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+
+[node name="JoyStick" parent="Container/JoyStickContainer" instance=ExtResource( 1 )]
+position = Vector2( 82, -80 )
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[node name="ButtonContainer" type="Control" parent="Container"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="GrabNDropButton" parent="Container/ButtonContainer" instance=ExtResource( 3 )]
+position = Vector2( -48, -48 )
